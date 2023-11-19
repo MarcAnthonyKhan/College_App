@@ -4,7 +4,7 @@ from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from datetime import datetime
 
 
-class Job(db.Model):
+class JobModel(db.Model):
     __tablename__ = "jobs"
 
     id = Column(Integer, primary_key=True)

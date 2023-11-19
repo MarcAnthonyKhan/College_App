@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from datetime import datetime
 
 
-class Message(db.Model):
+class MessageModel(db.Model):
     __tablename__ = "messages"
 
     messageId = Column(Integer, primary_key=True)

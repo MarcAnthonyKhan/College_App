@@ -2,7 +2,7 @@ from db import db
 from sqlalchemy import Column, Integer, String, ForeignKey
 
 
-class Profile(db.Model):
+class ProfileModel(db.Model):
     __tablename__ = "profiles"
 
     userId = Column(Integer, ForeignKey("users.id"))

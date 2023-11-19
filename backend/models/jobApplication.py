@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 
 
-class JobApplication(db.Model):
+class JobApplicationModel(db.Model):
     __tablename__ = "jobApplications"
 
     userId = Column(Integer, primary_key=True)

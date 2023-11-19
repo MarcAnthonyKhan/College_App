@@ -2,7 +2,7 @@ from db import db
 from sqlalchemy import Column, Integer, Boolean, ForeignKey
 
 
-class Friendship(db.Model):
+class FriendshipModel(db.Model):
     __tablename__ = "friendships"
 
     acceptRequest = Column(Boolean, default=False)

@@ -2,7 +2,7 @@ from db import db
 from sqlalchemy import Column, Integer, String, ForeignKey, CheckConstraint
 
 
-class WorkExperience(db.Model):
+class WorkExperienceModel(db.Model):
     __tablename__ = "workExperiences"
 
     id = Column(Integer, primary_key=True)
