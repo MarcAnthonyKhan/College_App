@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import pbkdf2_sha256
@@ -9,7 +10,7 @@ from flask_jwt_extended import (
 )
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from db import db
-from schema import UserSchema, UpdateUserSchema
+from schema import UserSchema, UpdateUserSchema, LoginUserSchema
 from models import UserModel
 
 blp = Blueprint("User", __name__, description="Blueprint for users")
@@ -33,6 +34,22 @@ class CreateUser(MethodView):
             abort(500, message="Error occured while creating user.")
 
         return {"message": "User created successfully."}
+
+
+@blp.route("/login")
+class LoginUser(MethodView):
+    @blp.arguments(LoginUserSchema)
+    def post(self, data):
+        user = UserModel.query.filter(UserModel.username == data["username"]).first()
+
+        if user and pbkdf2_sha256.verify(data["password"], user.password):
+            token = create_access_token(user.id)
+            refresh = create_refresh_token(user.id)
+
+        else:
+            abort(401, message="Incorrect username or password. Please try again.")
+
+        return jsonify({"Access Token": token, "Refresh Token": refresh})
 
 
 @blp.route("/user")
@@ -69,4 +86,4 @@ class UpdateUser(MethodView):
         db.session.delete(user)
         db.session.commit()
 
-        return {"message": f'Successfully deleted user!'}
+        return {"message": f"Successfully deleted user!"}

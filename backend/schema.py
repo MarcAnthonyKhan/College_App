@@ -19,3 +19,7 @@ class UpdateUserSchema(Schema):
     accountCreatedAt = fields.Str()
     lastSeenUserId = fields.Str()
     lastSeenJobId = fields.Str()
+    
+class LoginUserSchema(Schema):
+    username = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)
