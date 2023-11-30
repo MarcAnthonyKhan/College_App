@@ -49,7 +49,7 @@ class LoginUser(MethodView):
         else:
             abort(401, message="Incorrect username or password. Please try again.")
 
-        return jsonify({"Access Token": token, "Refresh Token": refresh})
+        return jsonify({"Access_Token": token, "Refresh_Token": refresh})
 
 
 @blp.route("/user")
